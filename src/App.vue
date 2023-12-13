@@ -1,7 +1,7 @@
 <template>
-  <div class="p-5 flex">
+  <div class="p-5 flex-container">
     <!-- Left Column for Multiple Select Dropdown -->
-    <div class="flex-1">
+    <div class="flex-item">
       <Dropdown :items="dropdownItems" :allowMultiple="true" @update:selected="updateSelectedMultiple" />
       <div v-if="selectedDataMultiple.length">
         <p>Selected Items (Multiple):</p>
@@ -12,7 +12,7 @@
     </div>
 
     <!-- Right Column for Single Select Dropdown -->
-    <div class="flex-1">
+    <div class="flex-item">
       <Dropdown :items="dropdownItems" :allowMultiple="false" @update:selected="updateSelectedSingle" />
       <div v-if="selectedDataSingle">
         <p>Selected Item (Single):</p>
@@ -45,5 +45,19 @@ const updateSelectedSingle = (data) => {
 </script>
 
 <style scoped>
-/* Add any additional styling if needed */
+.flex-container {
+  display: flex;
+  flex-direction: column; /* Default to column layout for mobile */
+}
+
+@media (min-width: 768px) { /* Adjust this breakpoint as needed */
+  .flex-container {
+    flex-direction: row; /* Switch to row layout for larger screens */
+  }
+}
+
+.flex-item {
+  flex: 1; /* Each item takes equal width */
+  padding: 10px; /* Add some padding for spacing */
+}
 </style>
